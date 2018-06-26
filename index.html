@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="sw.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+  <header>
+     <div class="col-12 main-header">
+         <h3>Always get the real exchange rate</h3>
+         <p class="caption">The exchange rate when you spend and transfer money.</p>
+     </div>
+  </header>
+
+  <section>
+
+    <form class="col-12">
+            <div class="col-6">
+                <p class="from">From</p>   
+                <select id="lists1" onChange="processList1()" >
+                            
+                          </select><br>
+                                      
+                          <input type="number" placeholder="Enter value to convert" id="input-box">
+                          
+                        </div>
+                            
+        <div class="col-6">
+              <p class="to">To</p>
+                <select id="lists2"  onChange="processList2()">
+                    
+                </select><br>
+                
+        <input type="number" id="results-box" placeholder="Results" readonly>
+        
+         <br>
+        </div>
+
+        
+
+        <button type="button" onClick="conversion()" id="convert" onclick="">Convert</button>
+  </section>
+</body>
+</html>
