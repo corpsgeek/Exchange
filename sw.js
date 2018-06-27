@@ -10,7 +10,7 @@ var cacheFiles = [
 ]
 
 
-this.addEventListener('install', function(e) {
+self.addEventListener('install', function(e) {
     console.log('[ServiceWorker] Installed');
 
     // e.waitUntil Delays the event until the Promise is resolved
