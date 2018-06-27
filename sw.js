@@ -1,10 +1,10 @@
 
 // Default files to always cache
 var cacheFiles = [
-	'Exchange/',
-	'Exchange/index.html',
-	'Exchange/app.js',
-	'Exchange/css/main.css'
+	'/Exchange/',
+	'/Exchange/index.html',
+	'/Exchange/app.js',
+	'/Exchange/css/main.css'
 	
 ]
 
