@@ -79,7 +79,14 @@ if ('serviceWorker' in navigator) {
 }
 
 //Working with indexeddb
-
-idb.open('test', 1, function(upgradeDb){
-
+(function(){
+    'use strict';
+    
+      //check for support
+      if (!('indexedDB' in window)) {
+        console.log('This browser doesn\'t support IndexedDB');
+        return;
+      }
+    
+      var dbPromise = idb.open('Currency Convert database', 1);
 });
