@@ -1,9 +1,9 @@
 let cacheName = 'v1';
 let cacheFiles = [
-    './',
-    'index.html',
-    './css/main.css',
-    '/app.js',
+    './Exchange',
+    './Exchange/index.html',
+    './Exchange/css/main.css',
+    './Exchange/app.js',
     
 ]
 
