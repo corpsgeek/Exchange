@@ -68,7 +68,7 @@ if(from.length >= 0 && to.length >= 0 && amount.length >= 0){
 if ('serviceWorker' in navigator) {
     
       navigator.serviceWorker
-        .register('Exchange/sw.js', { scope: 'Exchange/' })
+        .register('sw.js', { scope: '/' })
         .then(function(registration) {
           console.log("Service Worker Registered");
         })
