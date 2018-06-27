@@ -1,7 +1,3 @@
-
-
-
-
 self.addEventListener('install', function(e){
     console.log("[service worker], Installed");
     
@@ -10,9 +6,9 @@ self.addEventListener('install', function(e){
             console.log("[service worker] caching files");
             return cache.addAll([
                 '/',
-                'Exchange/index.html',
-                'Exchange/css/main.css',
-                'Exchange/app.js',
+                'index.html',
+                'css/main.css',
+                'app.js',
                 
             ]);
         })
