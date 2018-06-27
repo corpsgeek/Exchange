@@ -65,11 +65,10 @@ if(from.length >= 0 && to.length >= 0 && amount.length >= 0){
 }
 
 //Initializing service worker for  check
-if(serviceWorker in navigator){
-    navigator.serviceWorker.register('sw.js').then(function(registration){
-
-        console.log('Service worker registered', registration);
+if(navigator.serviceWorker){
+    navigation.serviceWorker.register('sw.js', '/').then(function(reg){
+        console.log("Service worker registered succesfully");
     }).catch(function(err){
-        console.log("Oops!!, Service worker failed to register", err);
+        console.log("!oops service worker failed to register");
     })
 }
