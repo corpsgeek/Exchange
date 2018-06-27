@@ -3,7 +3,8 @@ var cacheName = 'v1';
 var cacheFiles = [
 	'/Exchange/',
 	'/Exchange/index.html',
-	'/Exchange/app.js',
+    '/Exchange/app.js',
+    '/Exchange/idb.js',
     '/Exchange/css/main.css',
     
 	
