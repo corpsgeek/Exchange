@@ -48,14 +48,6 @@
         <input type="number" palceholder="Exchange rates" id="rates-box" readonly> <br>
         <button type="button" onClick="conversion()" id="convert" onclick="">Convert</button>
   </section>
-<script>
-if(navigator.serviceWorker){
-    navigator.serviceWorker.register('/sw.js', '/').then(function(reg){
-        console.log("Service worker registered succesfully");
-    }).catch(function(err){
-        console.log("!oops service worker failed to register");
-    })
-}
-  </script>
+
 </body>
 </html>

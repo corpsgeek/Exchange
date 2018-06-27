@@ -65,10 +65,13 @@ if(from.length >= 0 && to.length >= 0 && amount.length >= 0){
 }
 
 //Initializing service worker for  check
-if(navigator.serviceWorker){
-    navigator.serviceWorker.register('sw.js', '/').then(function(reg){
-        console.log("Service worker registered succesfully");
-    }).catch(function(err){
-        console.log("!oops service worker failed to register");
-    })
-}
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js', {scope: '/'})
+    .then(function(reg) {
+      // registration worked
+      console.log('Registration succeeded. Scope is ' + reg.scope);
+    }).catch(function(error) {
+      // registration failed
+      console.log('Registration failed with ' + error);
+    });
+  }
