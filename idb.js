@@ -1,6 +1,11 @@
 import idb from'idb';
 
-idb.open('Currencydb', 1, function(upgradeDb){
-  var keyValStore = upgradeDb.createObjectStore('keyval');
-  keyValStore.put('hello', 'greeting');  
-})
+document.addEventListener("DOMContentLoaded", function(){
+  
+     if("indexedDB" in window) {
+         console.log("YES!!! I CAN DO IT!!! WOOT!!!");
+     } else {
+         console.log("I has a sad.");
+     }
+  
+ },false);
