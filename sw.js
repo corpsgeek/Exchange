@@ -1,9 +1,9 @@
-this.addEventListener('install', function(event) {
+self.addEventListener('install', function(event) {
     event.waitUntil(
       caches.open('v1').then(function(cache) {
         return cache.addAll([
           '/Exchange/',
-          'https://github.com/corpsgeek/Exchange/blob/gh-pages/index.html',
+          '',
         
            ]);
       })
