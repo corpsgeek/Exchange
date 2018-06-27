@@ -1,11 +1,10 @@
-var cacheName = 'v1'; 
 
 // Default files to always cache
 var cacheFiles = [
-	'./',
+	'Exchange/',
 	'Exchange/index.html',
-	'./js/app.js',
-	'./css/main.css',
+	'Exchange/app.js',
+	'Exchange/css/main.css'
 	
 ]
 
