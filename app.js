@@ -81,7 +81,6 @@ if ('serviceWorker' in navigator) {
 //Working with indexed db
 if (!('indexedDB' in window)) {
   console.log('This browser doesn\'t support IndexedDB');
-  return;
 }else{
   console.log("Indexed db is supported by the browser");
 }
