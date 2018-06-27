@@ -1,4 +1,3 @@
-import idb from'idb';
 
 document.addEventListener("DOMContentLoaded", function(){
   
