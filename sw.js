@@ -1,29 +1,50 @@
-self.addEventListener('install', function(event) {
-    event.waitUntil(
-      caches.open('v1').then(function(cache) {
-        return cache.addAll([
-          '/Exchange/',
-          '',
-        
-           ]);
-      })
-    );
-  });
+var cacheName = 'v1'; 
 
-self.addEventListener('activate', function(e){
-    console.log("[service worker], activated");
-  e.waitUntil(
-      caches.keys().then(function(cacheNames){
-          return promise.all(cacheNames.map(function(thisCacheName){
-              if(thisCacheName !== cacheName){
-                  console.log("Service worker removing cache file");
-                  return caches.delete(thisCacheName);
-              }
-          }))
-      })
-  )
-})
+// Default files to always cache
+var cacheFiles = [
+	'./',
+	'./index.html',
+	'./js/app.js',
+	'./css/main.css',
+	'./Readme.md'
+]
 
-self.addEventListener('fetch', function(e){
-    console.log("[service worker] fetching", e.request.url)
-})
+
+self.addEventListener('install', function(e) {
+    console.log('[ServiceWorker] Installed');
+
+    // e.waitUntil Delays the event until the Promise is resolved
+    e.waitUntil(
+
+    	// Open the cache
+	    caches.open(cacheName).then(function(cache) {
+
+	    	// Add all the default files to the cache
+			console.log('[ServiceWorker] Caching cacheFiles');
+			return cache.addAll(cacheFiles);
+	    })
+	); // end e.waitUntil
+});
+
+
+self.addEventListener('activate', function(e) {
+    console.log('[ServiceWorker] Activated');
+
+    e.waitUntil(
+
+    	// Get all the cache keys (cacheName)
+		caches.keys().then(function(cacheNames) {
+			return Promise.all(cacheNames.map(function(thisCacheName) {
+
+				// If a cached item is saved under a previous cacheName
+				if (thisCacheName !== cacheName) {
+
+					// Delete that cached file
+					console.log('[ServiceWorker] Removing Cached Files from Cache - ', thisCacheName);
+					return caches.delete(thisCacheName);
+				}
+			}));
+		})
+	); // end e.waitUntil
+
+});
