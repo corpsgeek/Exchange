@@ -1,4 +1,4 @@
-
+var cacheName = 'v1';
 // Default files to always cache
 var cacheFiles = [
 	'/Exchange/',
@@ -17,7 +17,7 @@ self.addEventListener('install', function(e) {
     e.waitUntil(
 
     	// Open the cache
-	    caches.open('v1').then(function(cache) {
+	    caches.open(cacheName).then(function(cache) {
 
 	    	// Add all the default files to the cache
 			console.log('[ServiceWorker] Caching cacheFiles');
@@ -37,7 +37,7 @@ self.addEventListener('activate', function(e) {
 			return Promise.all(cacheNames.map(function(thisCacheName) {
 
 				// If a cached item is saved under a previous cacheName
-				if (thisCacheName !== 'v1') {
+				if (thisCacheName !== cacheName) {
 
 					// Delete that cached file
 					console.log('[ServiceWorker] Removing Cached Files from Cache - ', thisCacheName);
