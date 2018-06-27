@@ -66,7 +66,7 @@ if(from.length >= 0 && to.length >= 0 && amount.length >= 0){
 
 //Initializing service worker for  check
 if('serviceWorker' in navigator){
-    navigator.serviceWorker.register('sw.js', {scope: '/'}).then(function(registration){
+    navigator.serviceWorker.register('sw.js').then(function(registration){
 
         console.log('Service worker registered', registration);
     }).catch(function(err){
