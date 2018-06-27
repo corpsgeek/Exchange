@@ -3,10 +3,10 @@ var cacheName = 'v1';
 // Default files to always cache
 var cacheFiles = [
 	'./',
-	'./index.html',
+	'/index.html',
 	'./js/app.js',
 	'./css/main.css',
-	'./Readme.md'
+	
 ]
 
 
