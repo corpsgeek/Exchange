@@ -3,14 +3,14 @@ var cacheName = 'v1';
 // Default files to always cache
 var cacheFiles = [
 	'./',
-	'/index.html',
+	'Exchange/index.html',
 	'./js/app.js',
 	'./css/main.css',
 	
 ]
 
 
-self.addEventListener('install', function(e) {
+this.addEventListener('install', function(e) {
     console.log('[ServiceWorker] Installed');
 
     // e.waitUntil Delays the event until the Promise is resolved
