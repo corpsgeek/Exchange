@@ -84,3 +84,15 @@ if (!('indexedDB' in window)) {
 }else{
   console.log("Indexed db is supported by the browser");
 }
+var dbPromise = idb.open('CurrenciesDb', 2, function(upgradeDb){
+  switch (upgradeDb.oldVersion) {
+    case 0:
+      // a placeholder case so that the switch block will
+      // execute when the database is first created
+      // (oldVersion is 0)
+    case 1:
+      console.log('Creating the Currencies object store');
+      upgradeDb.createObjectStore('Currencies', {keyPath: 'id'});
+
+  }
+});
