@@ -76,4 +76,37 @@ if ('serviceWorker' in navigator) {
           console.log("Service Worker Failed to Register", err);
         })
     
-    }
+}
+
+//Working with indexeddb
+
+//variables to run the db
+var database, idb_request;
+
+//Creating database of currencies
+idb_request = window.indexedDB.open("currencies-db", 1);
+
+//Error handler if indexed db fails to open
+idb_request.addEventListener("error", function(event) {
+    console.log("Could not open Indexed DB due to error: " + this.errorCode);
+});
+
+fetch('https://free.currencyconverterapi.com/api/v5/currencies')
+.then(function(response) {
+  return response.json();
+})
+.then(function(myJson) {
+  const currency = myJson.results;
+  for(let key in currency){
+  
+idb_request.addEventListener("upgradeneeded", function(event) {
+    /* Here we create a new object store called data, and give it an auto-
+    generated key path */
+    var storage = this.result.createObjectStore("data", { autoIncrement: true });
+    // add an object to the "data" objectStore with the key, "save-data"
+    storage.add({ Currency_Name: `${currency[key].currencyName}`}, "save-data");
+    alert("Creating a new database!");
+});
+}
+  
+});
