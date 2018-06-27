@@ -4,7 +4,8 @@ this.addEventListener('install', function(event) {
         return cache.addAll([
           '/Exchange/',
           '/Exchange/index.html',
-          
+          'Exchange/app.js',
+          'Exchange/Readme.md',
            ]);
       })
     );
