@@ -1,4 +1,4 @@
-let cacheName = 'v1'
+
 
 
 
@@ -6,7 +6,7 @@ self.addEventListener('install', function(e){
     console.log("[service worker], Installed");
     
     e.waitUntil(
-        caches.open(cacheName).then(function(cache){
+        caches.open('v1').then(function(cache){
             console.log("[service worker] caching files");
             return cache.addAll([
                 '/',
