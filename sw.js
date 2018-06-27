@@ -3,7 +3,7 @@ this.addEventListener('install', function(event) {
       caches.open('v1').then(function(cache) {
         return cache.addAll([
           '/Exchange/',
-          '/Exchange/index.html',
+          'https://github.com/corpsgeek/Exchange/blob/gh-pages/index.html',
         
            ]);
       })
