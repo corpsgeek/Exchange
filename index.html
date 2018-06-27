@@ -19,15 +19,18 @@
 
   <section>
 
-    <form class="col-12">
+    <form>
+      <div class="row">
             <div class="col-6">
                 <p class="from">From</p>   
                 <select id="lists1" onChange="processList1()" >
                             
                           </select><br>
-                                      
+                         <div class="row">             
+                          <div class="col-12">
                           <input type="number" placeholder="0.00" id="input-box">
-                          
+                          </div>
+                        </div>
                         </div>
                             
         <div class="col-6">
@@ -36,14 +39,15 @@
                     
                 </select><br>
                 
-        <input type="number" id="results-box" placeholder="Results" readonly>
+        <input type="number" id="results-box" placeholder="0.00" readonly>
         
          <br>
         </div>
-
-        
-
+      </div>
+        <p>Rates</p>
+        <input type="number" palceholder="Exchange rates" id="rates-box" readonly> <br>
         <button type="button" onClick="conversion()" id="convert" onclick="">Convert</button>
   </section>
+
 </body>
 </html>

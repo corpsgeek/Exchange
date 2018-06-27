@@ -1,4 +1,1 @@
-# Exchange
-Andela project(Mobile web specialist)
-yes
-i am
+Andela challenge 1 task

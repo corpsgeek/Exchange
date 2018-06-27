@@ -35,6 +35,7 @@ body{
     [class*="col-"] {
         width: 100%;
     }
+
 }
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
@@ -58,12 +59,9 @@ form{
     padding-top: 200px;
 }
 #input-box, #results-box{
-    margin-top: 30px;
-    margin-right: 100px;
-    padding-left: 40px;
-    margin-left: 66px;
+  
     height: 200px;
-    width: 80%;
+    max-width: 80%;
     font-size: 40px;
     border: none;
 }
@@ -84,7 +82,8 @@ select{
     height: 35px;
     width: 200px;
     background-color: #B2DFDB;
-    border: none;
+    border:1px solid #616161;
+    border-radius: 4px;
     font-size: 22px;
     
 }
@@ -103,4 +102,13 @@ select{
     text-align: center;
     font-size: 17px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+p{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#rates-box{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom-color: #616161;
 }

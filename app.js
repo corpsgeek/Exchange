@@ -46,7 +46,8 @@ if(from.length >= 0 && to.length >= 0 && amount.length >= 0){
          let obj2 = from+'_'+to;
         
          let rate = obj[obj2].val;
-         //Prints the exchange rate
+         //Sets the exchange rate in a input field
+         document.getElementById("rates-box").innerHTML = rate;
 
          if(rate != undefined){
              //converting the inputed amount
@@ -61,4 +62,14 @@ if(from.length >= 0 && to.length >= 0 && amount.length >= 0){
  xmlhttp.open("GET", 'https://free.currencyconverterapi.com/api/v5/convert?q='+from+'_'+to+'&compact=y', true);
  xmlhttp.send();
     }
+}
+
+//Initializing service worker for  check
+if('serviceWorker' in navigator){
+    navigator.serviceWorkerContainer.register('sw.js', {scope: '/'}).then(function(registration){
+
+        console.log('Service worker registered', registration.scope);
+    }).catch(function(err){
+        console.log("Oops!!, Service worker failed to register", err);
+    })
 }
