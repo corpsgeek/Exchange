@@ -4,17 +4,17 @@ let cacheName = 'v1'
 
 self.addEventListener('install', function(e){
     console.log("[service worker], Installed");
-    var cacheFiles = [
-        './Exchange',
-        './index.html',
-        './Exchange/css/main.css',
-        './Exchange/app.js',
-        
-    ];
+    
     e.waitUntil(
         caches.open(cacheName).then(function(cache){
             console.log("[service worker] caching files");
-            return cache.addAll(cacheFiles);
+            return cache.addAll([
+                '/',
+                'Exchange/index.html',
+                'Exchange/css/main.css',
+                'Exchange/app.js',
+                
+            ]);
         })
     )
    
