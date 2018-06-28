@@ -39,14 +39,16 @@ request.onupgradeneeded = function(event) {
       .then(function(myJson) {
         const currency = myJson.results;
         for(let key in currency){
-          currenciesNameFetched = `${currency[key].currencyName}`;             
+          currenciesNameFetched = `${currency[key].currencyName}`; 
+          currenciesNameFetched.forEach(function(currencyNames) {
+            currencyNameStore.add(currencyNames);
+          });
+          console.log(currenciesNameFetched)            
         }
            
       
       });
-      currenciesNameFetched.forEach(function(currencyNames) {
-        currencyNameStore.add(currencyNames);
-      });
+     
     
   
 };
