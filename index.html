@@ -58,17 +58,14 @@ const dbPromise = idb.open('keyval-store', 2, upgradeDB => {
   // the fall-through behaviour is what we want.
   switch (upgradeDB.oldVersion) {
     case 0:
-      upgradeDB.createObjectStore('keyval');
+      upgradeDB.createObjectStore('CurrenciesName', {keyPath: 'currencyName'});
     case 1:
-      upgradeDB.createObjectStore('objs', {keyPath: 'id'});
+      upgradeDB.createObjectStore('CurrenciesID', {keyPath: 'currencyId'});
   }
 });
 dbPromise.then(db => {
-  const tx = db.transaction('objs', 'readwrite');
-  tx.objectStore('objs').put({
-    id: 123456,
-    data: {foo: "bar"}
-  });
+  const tx = db.transaction('currenciesID', 'readwrite');
+  tx.objectStore('currenciesID').put("12345");
   return tx.complete;
 });
     </script>
