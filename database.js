@@ -9,12 +9,14 @@ const dbPromise = idb.open('Currency-converter-db', 1, upgradeDB => {
       return response.json();
     })
     .then(function(myJson) {
-      const currency = myJson.results;
-    for(let key in currency){
+        let key;
+        const currency = myJson.results;
+    for( key in currency){
       const currName = `${currency[key].currencyName}`;
+        const currSym = `${currency[key].currencySymbol}`;
 
       const tx = db.transaction('currencyName-and-Symbol', 'readwrite');
-      tx.objectStore('currencyName-and-Symbol').add(currName);
+      tx.objectStore('currencyName-and-Symbol').put(currName, currSym);
       return tx.complete;
     }
 
