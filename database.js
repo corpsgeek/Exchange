@@ -1,7 +1,7 @@
 const dbPromise = idb.open('Currency-converter-db', 1, upgradeDB => {
     switch (upgradeDB.oldVersion) {
       case 0:
-        upgradeDB.createObjectStore('currencyName-and-Symbol',{keyPath: id});
+        upgradeDB.createObjectStore('currencyName-and-Symbol');
     }
   }).then(db => {
     fetch('https://free.currencyconverterapi.com/api/v5/currencies')
@@ -11,8 +11,8 @@ const dbPromise = idb.open('Currency-converter-db', 1, upgradeDB => {
     .then(function(myJson) {
         const currency = myJson.results;
     Object.values(currency).forEach(function(curr){
-        const allcurrencies = db.transaction('currencyName-and-Symbol', 'readwrite').objectStore('currencyName-and-Symbol');
-        allcurrencies.put(curr);
+        const tx = db.transaction('currencyName-and-Symbol', 'readwrite');
+        tx.objectStore('currencyName-and-Symbol').put(curr);
     })
    
 });
