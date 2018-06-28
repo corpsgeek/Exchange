@@ -27,5 +27,26 @@ request.onupgradeneeded = function(event) {
   // going to use "ssn" as our key path because it's guaranteed to be
   // unique - or at least that's what I was told during the kickoff meeting.
   var currencyNameStore = db.createObjectStore("Currencies Name", { keyPath: "name" });
+  var currenciesNameFetched;
+  
+    objectStore.transaction.oncomplete = function(event) {
+      // Store values in the newly created objectStore.
+      var  currencyNameStore = db.transaction("Curencies Name", "readwrite");
+      fetch('https://free.currencyconverterapi.com/api/v5/currencies')
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(myJson) {
+        const currency = myJson.results;
+        for(let key in currency){
+          currenciesNameFetched = `${currency[key].currencyName}`;             
+        }
+           
+      
+      });
+      currenciesNameFetched.forEach(function(currencyNames) {
+        currencyNameStore.add(currencyNames);
+      });
+    
   
 };
