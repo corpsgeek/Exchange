@@ -20,7 +20,7 @@ request.onsuccess = function(event) {
   db = event.target.result;
 };
 
-var transaction = db.transaction("MyTestDatabase", "readwrite");
+var transaction = indexedDB.transaction("MyTestDatabase", "readwrite");
 transaction.oncomplete = function(event) {
   alert("All done!");
 };
