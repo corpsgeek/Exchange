@@ -13,6 +13,24 @@ window.addEventListener('load', function(){
         document.getElementById("lists2").innerHTML += (`<option value = "${currency[list].id}">(${currency[list].currencySymbol})${currency[list].id} - ${currency[list].currencyName}</option>`)
        
     }
+    
+//Initializing service worker for  check
+if ('serviceWorker' in navigator) {
+  
+    navigator.serviceWorker
+      .register('sw.js', { scope: '/Exchange/' })
+      .then(function(registration) {
+        console.log("Service Worker Registered");
+      })
+      .catch(function(err) {
+        console.log("Service Worker Failed to Register", err);
+      })
+  
+}
+
+
+    dbPromise = idb.open('currency_db', 1, upgradeDB => {
+      upgradeDB.createObjectStore('rates', { keyPath: 'id' });
   });
 });
 let selectedValueOfList1 = 0;
@@ -62,20 +80,17 @@ if(from.length >= 0 && to.length >= 0 && amount.length >= 0){
  xmlhttp.open("GET", 'https://free.currencyconverterapi.com/api/v5/convert?q='+from+'_'+to+'&compact=y', true);
  xmlhttp.send();
     }
-}
+    dbPromise.then(db => {
+      const tx = db.transaction('rates', 'readwrite');
+      const ratesStore = tx.objectStore('rates');
 
-//Initializing service worker for  check
-if ('serviceWorker' in navigator) {
-    
-      navigator.serviceWorker
-        .register('sw.js', { scope: '/Exchange/' })
-        .then(function(registration) {
-          console.log("Service Worker Registered");
-        })
-        .catch(function(err) {
-          console.log("Service Worker Failed to Register", err);
-        })
-    
+      // add it if it doesn't exist, or update it if it already exists
+      ratesStore.put({
+        rate: rate_value,
+        id: `${from}_${to}`
+      });
+      return tx.complete;
+    });
 }
 
 
