@@ -1,4 +1,19 @@
+let dbPromise;
 window.addEventListener('load', function(){
+  //Initializing service worker for  check
+ if ('serviceWorker' in navigator) {
+  
+    navigator.serviceWorker
+      .register('sw.js', { scope: '/Exchange/' })
+      .then(function(registration) {
+        console.log("Service Worker Registered");
+      })
+      .catch(function(err) {
+        console.log("Service Worker Failed to Register", err);
+      })
+  
+}
+
   fetch('https://free.currencyconverterapi.com/api/v5/currencies')
    .then(function(response) {
      return response.json();
@@ -13,8 +28,18 @@ window.addEventListener('load', function(){
          document.getElementById("lists2").innerHTML += (`<option value = "${currency[list].id}">(${currency[list].currencySymbol})${currency[list].id} - ${currency[list].currencyName}</option>`)
         
      }
+     dbPromise = idb.open('converter-DB', 1, function(upgradeDB){
+      upgradeDB.createObjectStore('exchangeRate', {keyPath: 'id'});
+     });
    });
  });
+
+
+
+
+
+
+
  let selectedValueOfList1 = 0;
  let selectedValueOfList2 = 0;
  function processList1(){
@@ -64,16 +89,4 @@ window.addEventListener('load', function(){
      }
  }
  
- //Initializing service worker for  check
- if ('serviceWorker' in navigator) {
-     
-       navigator.serviceWorker
-         .register('sw.js', { scope: '/Exchange/' })
-         .then(function(registration) {
-           console.log("Service Worker Registered");
-         })
-         .catch(function(err) {
-           console.log("Service Worker Failed to Register", err);
-         })
-     
- }
+ 
