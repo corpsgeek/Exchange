@@ -1,4 +1,4 @@
-import idb from 'idb';
+
 
 let dbPromise;
 
