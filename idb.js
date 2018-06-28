@@ -11,7 +11,11 @@ if (!window.indexedDB) {
 }else{
   console.log("IndexedDb is up and running");
 }
-var dbPromise = idb.open('database1', 1, function(upgradeDb){
-  var store = upgradeDb.createObjectStore('Names', {keyval:"First"});
-  store.put('David');
-})
+var db;
+var request = indexedDB.open("MyTestDatabase");
+request.onerror = function(event) {
+  alert("Why didn't you allow my web app to use IndexedDB?!");
+};
+request.onsuccess = function(event) {
+  db = event.target.result;
+};
