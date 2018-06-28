@@ -77,7 +77,7 @@ window.addEventListener('load', function(){
           if(rate != undefined){
               //converting the inputed amount
               let convertedAmount =  parseFloat(amount * rate);
-              console.log(convertedAmount);
+              console.log(rate);
               document.getElementById("results-box").value = convertedAmount;
               
              }
@@ -85,10 +85,11 @@ window.addEventListener('load', function(){
               const tx = db.transaction('exchangeRate', 'readwrite');
               const exchangeRateStore = tx.objectStore('exchangeRate');
               exchangeRateStore.put({
-                Exchange_Rate: rate,
-                id: from_to
+                rate: rate,
+                id: obj2
               });
               return tx.complete;
+              return rate;
              }).catch(function(db){
                if(!Exchange_Rate){
                 window.alert("Cannot convert this currencies offline");
