@@ -56,13 +56,24 @@
 const dbPromise = idb.open('Currency-converter-db', 1, upgradeDB => {
   switch (upgradeDB.oldVersion) {
     case 0:
-      upgradeDB.createObjectStore('currencyName-and-Symbol');
+      upgradeDB.createObjectStore('currencyName-and-Symbol', {keyPath: "curencyName"});
   }
 }).then(db => {
+  fetch('https://free.currencyconverterapi.com/api/v5/currencies')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    const currency = myJson.results;
+    for(let key in currency){
+   
   const tx = db.transaction('currencyName-and-Symbol', 'readwrite');
-  tx.objectStore('currencyName-and-Symbol').put('london', '$');
+  tx.objectStore('currencyName-and-Symbol').put(`${currency[key].currencySymbol}`, `${currency[key].currencyName}`);
   return tx.complete;
-}).then(() => console.log("Done!"));
-    </script>
+   
+    }
+   
+  });
+}); </script>
 </body>
 </html>
