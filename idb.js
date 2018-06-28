@@ -25,7 +25,7 @@ db.onerror = function(event) {
   console.log("Database error: " + event.target.errorCode);
 };
 
-request.onupgradeneeded = function (event) {
+request = function (event) {
   
       var db = event.target.result;
   
