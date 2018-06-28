@@ -26,6 +26,6 @@ request.onupgradeneeded = function(event) {
   // Create an objectStore to hold information about our customers. We're
   // going to use "ssn" as our key path because it's guaranteed to be
   // unique - or at least that's what I was told during the kickoff meeting.
-  var currencyNameStore = db.createObjectStore("Currencies Name", { keyPath: "Currency Name" });
+  var currencyNameStore = db.createObjectStore("Currencies Name", { keyPath: "name" });
   
 };
