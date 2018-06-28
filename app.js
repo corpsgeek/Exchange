@@ -95,6 +95,12 @@ if(from.length >= 0 && to.length >= 0 && amount.length >= 0){
         id: `${from}_${to}`
       });
       return tx.complete;
+    }).catch(() => {
+    if (!isRateFound)
+      // if rateStored is true do nothing
+      // (because the resulting amount was already shown to the user)
+      // otherwise show alert (that says, you're offline, and that rate isn't stored)
+     alert("I cannot convert this while offline");  
     });
 }
 
