@@ -43,7 +43,7 @@ request.onupgradeneeded = function(event) {
           currenciesNameFetched.forEach(function(currencyNames) {
             currencyNameStore.add(currencyNames);
           });
-          console.log(currenciesNameFetched)            
+          console.log(currenciesNameFetched);            
         }
            
       
@@ -51,4 +51,5 @@ request.onupgradeneeded = function(event) {
      
     
   
+}
 };
