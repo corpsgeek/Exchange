@@ -82,7 +82,7 @@ var dbPromise = idb.open('CurrenciesDb', 4, function(upgradeDb){
 
 dbPromise.then(function(db){
   //Create a transaction
-  var tx = db.transaction('CurrenciesName', readWrite);
+  var tx = db.transaction('CurrenciesName', 'readWrite');
   var CurrenciesNameStore = tx.objectStore('CurrenciesName');
 
     //Fetching currency details again
