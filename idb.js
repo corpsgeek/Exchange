@@ -19,11 +19,7 @@ request.onerror = function(event) {
 request.onsuccess = function(event) {
   db = event.target.result;
 };
-db.onerror = function(event) {
-  // Generic error handler for all errors targeted at this database's
-  // requests!
-  console.log("Database error: " + event.target.errorCode);
-};
+
 
 request = function (event) {
   
