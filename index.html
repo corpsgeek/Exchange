@@ -64,11 +64,8 @@ const dbPromise = idb.open('keyval-store', 2, upgradeDB => {
   }
 });
 dbPromise.then(db => {
-  const tx = db.transaction('objs', 'readwrite');
-  tx.objectStore('objs').put({
-    id: 123456,
-    data: {foo: "bar"}
-  });
+  const tx = db.transaction('currenciesName', 'readwrite');
+  tx.objectStore('currenciesName').put('london', 'country');
   return tx.complete;
 });
     </script>
