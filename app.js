@@ -1,3 +1,8 @@
+import idb from 'idb';
+
+let dbPromise;
+
+
 window.addEventListener('load', function(){
  fetch('https://free.currencyconverterapi.com/api/v5/currencies')
   .then(function(response) {
