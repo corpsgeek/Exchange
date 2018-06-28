@@ -18,7 +18,7 @@ function createDB() {
 		});
 	});
   }
-  
+
 var cacheName = 'v1';
 // Default files to always cache
 var cacheFiles = [
@@ -52,7 +52,7 @@ self.addEventListener('install', function(e) {
 
 self.addEventListener('activate', function(e) {
     console.log('[ServiceWorker] Activated');
-	event.waitUntil(
+	e.waitUntil(
 		createDB()
 	  );
     e.waitUntil(
