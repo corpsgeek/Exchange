@@ -8,7 +8,11 @@ var dbPromise =	idb.open('rates', 1, function(upgradeDB) {
 		  return response.json();
 		})
 		.then(function(myJson) {
-		  const currency = myJson.results;
+          const currency = myJson.results;
+          
+          for (var loop = 0; loop < currency.length; loop++) {
+           console.log(loop); 
+          }
 		  for(let key in currency){
               console.log(currency[key]);
             var tx = db.transaction('rates', 'readwrite');
