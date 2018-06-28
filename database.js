@@ -1,7 +1,7 @@
 const dbPromise = idb.open('Currency-converter-db', 1, upgradeDB => {
     switch (upgradeDB.oldVersion) {
       case 0:
-        upgradeDB.createObjectStore('currencyName-and-Symbol', { autoIncrement : true });
+        upgradeDB.createObjectStore('currencyName-and-Symbol');
     }
   }).then(db => {
     fetch('https://free.currencyconverterapi.com/api/v5/currencies')
@@ -14,7 +14,7 @@ const dbPromise = idb.open('Currency-converter-db', 1, upgradeDB => {
       const currName = `${currency[key].currencyName}`;
 
       const tx = db.transaction('currencyName-and-Symbol', 'readwrite');
-      tx.objectStore('currencyName-and-Symbol').put( currName);
+      tx.objectStore('currencyName-and-Symbol').put(currName, "hi");
       return tx.complete;
     }
 
