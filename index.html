@@ -53,24 +53,16 @@
 
   <script>
 
-const dbPromise = idb.open('keyval-store', 2, upgradeDB => {
-  // Note: we don't use 'break' in this switch statement,
-  // the fall-through behaviour is what we want.
+const dbPromise = idb.open('keyval-store', 1, upgradeDB => {
   switch (upgradeDB.oldVersion) {
     case 0:
-      upgradeDB.createObjectStore('CurrenciesName', {keyPath: 'currencyName'});
-    case 1:
-      upgradeDB.createObjectStore('CurrenciesID', {keyPath: 'currencyId'});
+      upgradeDB.createObjectStore('keyval');
   }
-});
-dbPromise.then(db => {
-  const tx = db.transaction('currenciesName', 'readwrite');
-  tx.objectStore('currenciesName').put({
-    currencyName: 'London'
-    
-  });
+}).then(db => {
+  const tx = db.transaction('keyval', 'readwrite');
+  tx.objectStore('keyval').put('hello', 'world');
   return tx.complete;
-});
+}).then(() => console.log("Done!"));
     </script>
 </body>
 </html>
