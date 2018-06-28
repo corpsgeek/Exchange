@@ -4,7 +4,8 @@ var cacheFiles = [
 	'/Exchange/',
 	'/Exchange/index.html',
     '/Exchange/app.js',
-    '/Exchange/idb.js',
+	'/Exchange/idb.js',
+	'/Exchange/database.js',
     '/Exchange/css/main.css',
     
 	

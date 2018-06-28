@@ -9,7 +9,7 @@
     <script src="sw.js"></script>
     <script src="app.js"></script>
     <script src="idb.js"></script>
-  
+    <script src="database.js"></script>
 </head>
 <body>
   <header>
@@ -51,29 +51,6 @@
         <button type="button" onClick="conversion()" id="convert" onclick="">Convert</button>
   </section>
 
-  <script>
-
-const dbPromise = idb.open('Currency-converter-db', 1, upgradeDB => {
-  switch (upgradeDB.oldVersion) {
-    case 0:
-      upgradeDB.createObjectStore('currencyName-and-Symbol');
-  }
-}).then(db => {
-  fetch('https://free.currencyconverterapi.com/api/v5/currencies')
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(myJson) {
-    const currency = myJson.results;
-    for(let key in currency){
-   
-  const tx = db.transaction('currencyName-and-Symbol', 'readwrite');
-  tx.objectStore('currencyName-and-Symbol').put(`${currency[key].currencySymbol}`, `${currency[key].currencyName}`);
-  return tx.complete;
-   
-    }
-   
-  });
-}); </script>
+ 
 </body>
 </html>
