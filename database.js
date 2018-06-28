@@ -13,7 +13,7 @@ const dbPromise = idb.open('Currency-converter-db', 1, upgradeDB => {
     Object.values(currency).forEach(function(curr){
         const tx = db.transaction('currencyName-and-Symbol', 'readwrite');
         tx.objectStore('currencyName-and-Symbol').add(curr);
-    })
+    });
    
 });
 });
