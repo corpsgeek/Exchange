@@ -10,9 +10,9 @@ const dbPromise = idb.open('Currency-converter-db', 1, upgradeDB => {
     })
     .then(function(myJson) {
       const currency = myJson.results;
-      currency.forEach(`${currencyName}`){
+      currency.forEach(function(currencyName){
           console.log(`${currencyName}`);
-      }
+      });
    
 });
 });
