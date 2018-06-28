@@ -81,6 +81,19 @@ window.addEventListener('load', function(){
               document.getElementById("results-box").value = convertedAmount;
               
              }
+             dbPromise.then(function(db){
+              const tx = db.transaction('exchangeRate', 'readwrite');
+              const exchangeRateStore = tx.objectStore('exchangeRate');
+              exchangeRateStore.put({
+                Exchange_Rate: rate,
+                id: from_to
+              });
+              return tx.complete;
+             }).catch(function(db){
+               if(!Exchange_Rate){
+                window.alert("Cannot convert this currencies offline");
+               }
+             });
         }
      }
  
