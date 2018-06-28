@@ -53,14 +53,14 @@
 
   <script>
 
-const dbPromise = idb.open('keyval-store', 1, upgradeDB => {
+const dbPromise = idb.open('Currency-converter-db', 1, upgradeDB => {
   switch (upgradeDB.oldVersion) {
     case 0:
-      upgradeDB.createObjectStore('keyval');
+      upgradeDB.createObjectStore('currencyName-and-Symbol');
   }
 }).then(db => {
-  const tx = db.transaction('keyval', 'readwrite');
-  tx.objectStore('keyval').put('hello', 'world');
+  const tx = db.transaction('currencyName-and-Symbol', 'readwrite');
+  tx.objectStore('currencyName-and-Symbol').put('london', '$');
   return tx.complete;
 }).then(() => console.log("Done!"));
     </script>
