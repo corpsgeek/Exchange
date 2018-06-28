@@ -56,7 +56,7 @@
 const dbPromise = idb.open('Currency-converter-db', 1, upgradeDB => {
   switch (upgradeDB.oldVersion) {
     case 0:
-      upgradeDB.createObjectStore('currencyName-and-Symbol', {keyPath: "curencyName"});
+      upgradeDB.createObjectStore('currencyName-and-Symbol');
   }
 }).then(db => {
   fetch('https://free.currencyconverterapi.com/api/v5/currencies')
