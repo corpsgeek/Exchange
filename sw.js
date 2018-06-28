@@ -1,24 +1,4 @@
 
-function createDB() {
-	idb.open('rates', 1, function(upgradeDB) {
-	  var ratesStore = upgradeDB.createObjectStore('rates', {
-		keyPath: 'id'});
-		fetch('https://free.currencyconverterapi.com/api/v5/currencies')
-		.then(function(response) {
-		  return response.json();
-		})
-		.then(function(myJson) {
-		  const currency = myJson.results;
-		  for(let key in currency){
-			  
-			  ratesStore.put({id: `${currency[key].id}`, name: 'coke', price: 10.99, quantity: 200});
-			  
-		  }
-		  
-		});
-	});
-  }
-
 var cacheName = 'v1';
 // Default files to always cache
 var cacheFiles = [
@@ -52,11 +32,9 @@ self.addEventListener('install', function(e) {
 
 self.addEventListener('activate', function(e) {
     console.log('[ServiceWorker] Activated');
-	e.waitUntil(
-		createDB()
-	  );
+	  
     e.waitUntil(
-
+		
     	// Get all the cache keys (cacheName)
 		caches.keys().then(function(cacheNames) {
 			return Promise.all(cacheNames.map(function(thisCacheName) {
