@@ -16,7 +16,7 @@ const dbPromise = idb.open('Currency-converter-db', 1, upgradeDB => {
         const currSym = `${currency[key].currencySymbol}`;
 
       const tx = db.transaction('currencyName-and-Symbol', 'readwrite');
-      tx.objectStore('currencyName-and-Symbol').put(currName, currSym);
+      tx.objectStore('currencyName-and-Symbol').put(currSym, currName );
       return tx.complete;
     }
 
