@@ -97,7 +97,7 @@ fetch('https://free.currencyconverterapi.com/api/v5/currencies')
       }
   });
  //Create a transaction
- var tx = db.transaction('CurrenciesName', 'readWrite');
+ var tx = db.transaction('CurrenciesName', IDBTransaction.READ_WRITE);
   var CurrenciesNameStore = tx.objectStore('CurrenciesName');
 
   CurrenciesNameStore.put(currName);
