@@ -20,19 +20,18 @@ request.onsuccess = function(event) {
   db = event.target.result;
 };
 
+var transaction = db.transaction("MyTestDatabase", "readwrite");
+transaction.oncomplete = function(event) {
+  alert("All done!");
+};
 
-request = function (event) {
-  
-      var db = event.target.result;
-  
-      // Create another object store called "names" with the autoIncrement flag set as true.    
-      var objStore = db.createObjectStore("names", { autoIncrement : true });
-    objStore.add("peter");
-      // Because the "names" object store has the key generator, the key for the name value is generated automatically.
-      // The added records would be like:
-      // key : 1 => value : "Bill"
-      // key : 2 => value : "Donna"
-    //  customerData.forEach(function(customer) {
-      //    objStore.add(customer.name);
-      //});
+transaction.onerror = function(event) {
+  // Don't forget to handle errors!
+  console.log(event);
+};
+
+var objectStore = transaction.objectStore("MyTestDatabase");
+  var request = objectStore.add(customer);
+  request.onsuccess = function(event) {
+    console.log("Success!!");
   };
