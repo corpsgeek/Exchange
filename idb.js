@@ -14,8 +14,29 @@ if (!window.indexedDB) {
 var db;
 var request = indexedDB.open("MyTestDatabase");
 request.onerror = function(event) {
-  alert("Why didn't you allow my web app to use IndexedDB?!");
+  console.log("Why didn't you allow my web app to use IndexedDB?!");
 };
 request.onsuccess = function(event) {
   db = event.target.result;
 };
+db.onerror = function(event) {
+  // Generic error handler for all errors targeted at this database's
+  // requests!
+  console.log("Database error: " + event.target.errorCode);
+};
+
+request.onupgradeneeded = function (event) {
+  
+      var db = event.target.result;
+  
+      // Create another object store called "names" with the autoIncrement flag set as true.    
+      var objStore = db.createObjectStore("names", { autoIncrement : true });
+    objStore.add("peter");
+      // Because the "names" object store has the key generator, the key for the name value is generated automatically.
+      // The added records would be like:
+      // key : 1 => value : "Bill"
+      // key : 2 => value : "Donna"
+    //  customerData.forEach(function(customer) {
+      //    objStore.add(customer.name);
+      //});
+  };
