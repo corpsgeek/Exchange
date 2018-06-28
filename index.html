@@ -81,10 +81,7 @@ var dbPromise = idb.open('CurrenciesDb', 4, function(upgradeDb){
 });
 
 dbPromise.then(function(db){
-  //Create a transaction
-  var tx = db.transaction('CurrenciesName', 'readWrite');
-  var CurrenciesNameStore = tx.objectStore('CurrenciesName');
-
+  let currName;
     //Fetching currency details again
 fetch('https://free.currencyconverterapi.com/api/v5/currencies')
   .then(function(response) {
@@ -94,13 +91,21 @@ fetch('https://free.currencyconverterapi.com/api/v5/currencies')
     const currency = myJson.results;
     for(let key in currency){
         //put currency Name in db
-      CurrenciesNameStore.put(`${currency[key].currencyName}`);
+         currName =`${currency[key].currencyName}`;
+ console.log(currName);
+ 
       }
   });
+ //Create a transaction
+ var tx = db.transaction('CurrenciesName', 'readWrite');
+  var CurrenciesNameStore = tx.objectStore('CurrenciesName');
 
-
+  CurrenciesNameStore.put(currName);
+  
   return tx.complete;
-});
+}).then(function(){
+  console.log("Added all currencies name to the database");
+})
   </script>
 </body>
 </html>
