@@ -65,7 +65,7 @@ const dbPromise = idb.open('keyval-store', 2, upgradeDB => {
 });
 dbPromise.then(db => {
   const tx = db.transaction('currenciesID', 'readwrite');
-  tx.objectStore('currenciesID').put("12345");
+  tx.objectStore('currenciesID').add("12345");
   return tx.complete;
 });
     </script>
