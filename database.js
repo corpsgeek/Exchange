@@ -4,6 +4,13 @@ const dbPromise = idb.open('Currency-converter-db', 1, upgradeDB => {
         upgradeDB.createObjectStore('currencyName-and-Symbol', { autoIncrement : true });
     }
   }).then(db => {
-      
+    fetch('https://free.currencyconverterapi.com/api/v5/currencies')
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(myJson) {
+      const currency = myJson.results;
+      console.log(currency);
    
-  });
+});
+});
