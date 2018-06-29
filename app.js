@@ -47,19 +47,13 @@ window.addEventListener('load', () => {
       
        
       }).catch(db =>{
-        console.log('oops! an error occured');
+        console.log('offline');
+        dbPromise.then(db => {
+          
+            db.transaction('currenciesName').objectStore('currenciesName').getAll().then(allObjs => console.log(allObjs));
+          })
       });
-      dbPromise.then(db => {
-       let idd = '';
-        let name = '';
-     
-        for(let i in currency){
-           idd = `${currency[i].id}`;
-           name = `${currency[i].currencyName}`;
-        }
-        return db.transaction('currenciesName')
-          .objectStore('currenciesName').getAll(name);
-      }).then(allObjs => console.log(allObjs));
+    
     });
  });
 
