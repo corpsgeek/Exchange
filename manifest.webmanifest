@@ -1,0 +1,11 @@
+{
+"name": "Currency Converter",
+"short_name": "CurrencyConv",
+"display": "standalone",
+"start_url": ".",
+"background_color": "#fff",
+"description": "Alcwithgoogle3.0 challenge 1 project.",
+"lang": "en-US",
+"scope": "/Exchange/",
+"theme_color": "#004D40"
+}
