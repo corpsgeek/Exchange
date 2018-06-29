@@ -122,7 +122,8 @@ window.addEventListener('load', () => {
                }
              });
              
-        }else{
+        }
+        if (this.readyState !== 4 && this.status !== 200) {
           //While there is no internet connection convert offline by fetching used rates from db.
           dbPromise.then(db => {
             //strong currency id in obj2 e.g USD_FRK.
