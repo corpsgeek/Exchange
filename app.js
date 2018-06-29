@@ -51,11 +51,11 @@ window.addEventListener('load', () => {
       });
    }).catch(myJson => {
     dbPromise.then(db => {
-    const  curr = db.transaction('currenciesName').objectStore('currenciesName');
-      curr.get(`${currency[i].currencySymbol}`).then(curName => {
-        let offlinecurrName = curName.currencyName;
-        console.log(offlinecurrName);
-    });
+      return currDb.getAll();
+
+    }).then(function(curre){
+      console.log(curre);
+    })
    });
  });
 
