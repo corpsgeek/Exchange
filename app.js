@@ -40,8 +40,10 @@ window.addEventListener('load', () => {
      dbPromise.then(db => {
        const transaction =  db.transaction('currenciesName', 'readwrite');
        currDb = transaction.objectStore('currenciesName');
-       
-       currDb.add('peter', 'dacid'); 
+       for(let i in currency){
+        currDb.add(`${currency[i].currencySymbol}`, `${currency[i].currencyName}`);
+       }
+        
        
       })
    });
