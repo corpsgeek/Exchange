@@ -95,6 +95,10 @@ window.addEventListener('load', function(){
                 window.alert("Cannot convert this currencies offline");
                }
              });
+             dbPromise.then(db => {
+              return db.transaction('exchangeRate')
+                .objectStore('exchangeRate').get(obj2);
+            }).then(obj => console.log(obj));
              dbPromise.then(function(db){
                 const exchangeRateStore = db.transaction('exchangeRate').objectStore('exchangeRate');
                 let offlineRate;
