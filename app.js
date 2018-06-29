@@ -40,7 +40,7 @@ window.addEventListener('load', () => {
      dbPromise.then(db => {
        currDb = db.transaction('currenciesName', 'readwrite').objectStore('currenciesName');
        console.log(currency);
-         currDb.put(currency.currencyName);
+         currDb.add(currency.currencyName);
        
       })
    });
