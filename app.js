@@ -51,7 +51,7 @@ window.addEventListener('load', () => {
       });
       dbPromise.then(db => {
         const idd = '';
-        const name;
+        const name = '';
      
         for(let i in currency){
            idd = `${currency[i].id}`;
