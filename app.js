@@ -48,7 +48,11 @@ window.addEventListener('load', function(){
   
      
  }
- 
+ let from;
+ let to;
+ let amount;
+ let obj2;
+ let rate;
  function processList2(){
      //Storing currency value for first lists
       selectedValueOfList2 = document.getElementById("lists2").value;
@@ -57,10 +61,10 @@ window.addEventListener('load', function(){
  let conversionValue = 0;
  function conversion(){
  
- let from = document.getElementById("lists1").value;
- let to = document.getElementById("lists2").value;
+from = document.getElementById("lists1").value;
+to = document.getElementById("lists2").value;
  
- let amount = document.getElementById("input-box").value;
+ amount = document.getElementById("input-box").value;
  
  if(from.length >= 0 && to.length >= 0 && amount.length >= 0){
   var xmlhttp = new XMLHttpRequest();
@@ -68,9 +72,9 @@ window.addEventListener('load', function(){
       if (this.readyState == 4 && this.status == 200) {
           let obj = JSON.parse(this.responseText);
           //stores the currency id i format
-          let obj2 = from+'_'+to;
+          obj2 = from+'_'+to;
          
-          let rate = obj[obj2].val;
+           rate = obj[obj2].val;
           //Sets the exchange rate in a input field
           document.getElementById("rates-box").value = rate;
  
@@ -95,26 +99,7 @@ window.addEventListener('load', function(){
                 window.alert("Cannot convert this currencies offline");
                }
              });
-             dbPromise.then(function(db){
-              const exchangeRateStore = db.transaction('exchangeRate').objectStore('exchangeRate');
-              let storedRate;
-              exchangeRateStore.openCursor().then(function cursorIterate(cursor){
-                if(!cursor) return;
-                storedRate = cursor.value;
-                return(
-                  cursor.value.id === obj2 ||
-                  cursor.continue().then(cursorIterate)
-              );
-              })
-             }).then(function(isRateFound){
-              if (isRateFound && storedRate)
-                console.log(storedRate.rate);
-                convertedAmount = storedRate.rate * amount;
-              convertedAmount =  `${to} ${(
-                  storedRate.rate * amount
-                ).toFixed(2)}`;
-
-             })
+            
         }
      }
  
@@ -123,5 +108,25 @@ window.addEventListener('load', function(){
      }
 
  }
+ dbPromise.then(function(db){
+  const exchangeRateStore = db.transaction('exchangeRate').objectStore('exchangeRate');
+  let storedRate;
+  exchangeRateStore.openCursor().then(function cursorIterate(cursor){
+    if(!cursor) return;
+    storedRate = cursor.value;
+    return(
+      cursor.value.id === obj2 ||
+      cursor.continue().then(cursorIterate)
+  );
+  })
+ }).then(function(isRateFound){
+  if (isRateFound && storedRate)
+    console.log(storedRate.rate);
+    convertedAmount = storedRate.rate * amount;
+  convertedAmount =  `${to} ${(
+      storedRate.rate * amount
+    ).toFixed(2)}`;
+
+
  
  
