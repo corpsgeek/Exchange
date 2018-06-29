@@ -109,4 +109,18 @@ window.addEventListener('load', function(){
 
  }
  
- 
+ function convertOffline(e){
+  var transaction = db.transaction(['exchangeRate'], readonly);
+  var exchangeRateStore = transaction.objectStore('exchangeRate');
+  var index = exchangeRateStore.index(rate);
+  var output;
+  index.opunCursor().onsuccess = function(e){
+    var cursor = e.target.result;
+    if(cursor){
+      if(cursor.value.id == 'EUR_ALL'){
+        output = cursor.value.rate;
+        console.log(output);
+      }
+    }
+  }
+ }
