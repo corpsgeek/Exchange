@@ -29,7 +29,8 @@ window.addEventListener('load', function(){
         
      }
      dbPromise = idb.open('converter-DB', 1, function(upgradeDB){
-      upgradeDB.createObjectStore('exchangeRate', {keyPath: 'id'});
+      let exchangeRateStore = upgradeDB.createObjectStore('exchangeRate', {keyPath: 'id'});
+
      });
    });
  });
@@ -84,6 +85,7 @@ window.addEventListener('load', function(){
              dbPromise.then(function(db){
               const tx = db.transaction('exchangeRate', 'readwrite');
               const exchangeRateStore = tx.objectStore('exchangeRate');
+           
               exchangeRateStore.put({
                 rate: rate,
                 id: obj2
