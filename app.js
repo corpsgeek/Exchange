@@ -142,6 +142,8 @@ window.addEventListener('load', () => {
                    document.getElementById("results-box").value = convertedAmount;
                    
                   }
+            }).catch(rateStored =>{
+              console.log('Rate not found in database');
             });
          
           });
