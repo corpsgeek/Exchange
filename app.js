@@ -33,13 +33,14 @@ window.addEventListener('load', () => {
        case 0: 
         upgradeDB.createObjectStore('exchangeRate', {keyPath: 'id'});
       case 1: 
-        const currDb =  upgradeDB.createObjectStore('currenciesName');
+        const currDb =  upgradeDB.createObjectStore('currenciesName', {autoIncrement: true});
 
       }
      });
      dbPromise.then(db => {
        currDb = db.transaction('currenciesName', 'readwrite').objectStore('currenciesName');
        for(let i in currency){
+         currDb.put(`${currency[i].currencyName}`);
         console.log(`${currency[i].currencyName}`);
         
        }
