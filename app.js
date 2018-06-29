@@ -37,9 +37,20 @@ window.addEventListener('load', function(){
  });
 
 
+ let from = document.getElementById("lists1").value;
+ let to = document.getElementById("lists2").value;
+ let amount = document.getElementById("input-box").value;
+ 
 
-
-
+ fetch(`https://free.currencyconverterapi.com/api/v5/convert?q=${from}_${to}&compact=y`)
+ .then(function(response) {
+   return response.json();
+ })
+ .then(function(myJson) {
+let calc = myJson[query].val;
+console.log(calc);
+    
+ });
 
 
  let selectedValueOfList1 = 0;
