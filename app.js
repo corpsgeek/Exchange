@@ -41,18 +41,16 @@ window.addEventListener('load', function(){
  let from = document.getElementById("lists1").value;
  let to = document.getElementById("lists2").value;
  let amount = document.getElementById("input-box").value;
- let selectedValueOfList1;
- let selectedValueOfList2;
+
  function processList1(){
      //Storing currency value for first lists
-      selectedValueOfList1 = document.getElementById("lists1").value;
-  
+     from = document.getElementById("lists1").value;
      
  }
  
  function processList2(){
      //Storing currency value for first lists
-      selectedValueOfList2 = document.getElementById("lists2").value;
+     to = document.getElementById("lists2").value;
      
  }
 
