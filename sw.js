@@ -8,7 +8,8 @@ var cacheFiles = [
 	'/Exchange/idb.js',
 	'/Exchange/shekel.png',
 	'/Exchange/manifest.webmanifest',
-    '/Exchange/css/main.css',
+	'/Exchange/css/main.css',
+	'https://png.icons8.com/small/64/000000/shekel.png',
     
 	
 ]
