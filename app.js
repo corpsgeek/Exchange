@@ -49,6 +49,10 @@ window.addEventListener('load', () => {
       }).catch(db =>{
         console.log('oops! an error occured');
       });
+      dbPromise.then(db => {
+        return db.transaction('currenciesName')
+          .objectStore('currenciesName').getAll();
+      }).then(allObjs => console.log(allObjs));
     });
  });
 
