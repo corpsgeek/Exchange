@@ -1,6 +1,6 @@
 {
-"name": "Currency Converter",
-"short_name": "CurrencyConv",
+"name": "Money Exchange",
+"short_name": "MoneyEx",
 "display": "standalone",
 "start_url": ".",
 "background_color": "#fff",
