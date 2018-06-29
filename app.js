@@ -81,6 +81,8 @@ window.addEventListener('load', function(){
               document.getElementById("results-box").value = convertedAmount;
               
              }
+             xmlhttp.open("GET", 'https://free.currencyconverterapi.com/api/v5/convert?q='+from+'_'+to+'&compact=y', true);
+             xmlhttp.send();
              dbPromise.then(function(db){
               const tx = db.transaction('exchangeRate', 'readwrite');
               const exchangeRateStore = tx.objectStore('exchangeRate');
@@ -119,13 +121,12 @@ window.addEventListener('load', function(){
                             ).toFixed(2)}`)
                         );
                 });
-                amount.focus();
+              
              });
         }
      }
  
-  xmlhttp.open("GET", 'https://free.currencyconverterapi.com/api/v5/convert?q='+from+'_'+to+'&compact=y', true);
-  xmlhttp.send();
+ 
      }
  }
  
