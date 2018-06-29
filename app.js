@@ -43,7 +43,6 @@ window.addEventListener('load', () => {
        for(let i in currency){
         console.log(`${currency[i].currencyName}`);
        currDb.put({
-          symbol: `${currency[i].currencySymbol}`, 
           id: `${currency[i].currencyName}`
         });
         
