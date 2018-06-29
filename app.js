@@ -38,12 +38,17 @@ window.addEventListener('load', () => {
       }
      });
      dbPromise.then(db => {
-       currDb = db.transaction('currenciesName', 'readwrite').objectStore('currenciesName');
+       const transaction =  db.transaction('currenciesName', 'readwrite');
+       currDb = transaction.objectStore('currenciesName');
        for(let i in currency){
-         currDb.put(`${currency[i].currencyName}`);
         console.log(`${currency[i].currencyName}`);
+       currDb.put({
+          symbol: `${currency[i].currencySymbol}`, 
+          id: `${currency[i].currencyName}`
+        });
         
-       }
+       } return transaction.complete;
+       
         
        
       })
