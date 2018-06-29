@@ -40,7 +40,7 @@ window.addEventListener('load', () => {
      dbPromise.then(db => {
        currDb = db.transaction('currenciesName', 'readwrite').objectStore('currenciesName');
        for(let i in currency){
-        console.log(`${currency.currencyName}`);
+        console.log(`${currency[i].currencyName}`);
         
        }
         
