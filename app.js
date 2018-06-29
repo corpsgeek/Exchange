@@ -30,6 +30,7 @@ window.addEventListener('load', function(){
      }
      dbPromise = idb.open('converter-DB', 1, function(upgradeDB){
       let exchangeRateStore = upgradeDB.createObjectStore('exchangeRate', {keyPath: 'id'});
+      exchangeRateStore.createIndex('rate');
 
      });
    });
@@ -85,14 +86,18 @@ window.addEventListener('load', function(){
              dbPromise.then(function(db){
               const tx = db.transaction('exchangeRate', 'readwrite');
               const exchangeRateStore = tx.objectStore('exchangeRate');
-           
+              
               exchangeRateStore.put({
                 rate: rate,
                 id: obj2
               });
               return tx.complete;
               return rate;
-             }).catch(function(db){
+              
+              let rateIndex = exchangeRateStore.index('rate');
+              return rateIndex.get(obj2); rateIndex.get(obj2) = offlineRate;
+              convertedAmount = offlineRate * amount;
+            }).catch(function(db){
                if(!Exchange_Rate){
                 window.alert("Cannot convert this currencies offline");
                }
