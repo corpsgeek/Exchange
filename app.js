@@ -33,22 +33,15 @@ window.addEventListener('load', () => {
        case 0: 
         upgradeDB.createObjectStore('exchangeRate', {keyPath: 'id'});
       case 1: 
-        const currDb =  upgradeDB.createObjectStore('currenciesName', {keyPath: 'id'});
+        const currDb =  upgradeDB.createObjectStore('currenciesName');
 
       }
      });
      dbPromise.then(db => {
        const transaction =  db.transaction('currenciesName', 'readwrite');
        currDb = transaction.objectStore('currenciesName');
-       for(let i in currency){
-        console.log(`${currency[i].currencyName}`);
-       currDb.put({
-          id: `${currency[i].currencyName}`
-        });
-        
-       } return transaction.complete;
        
-        
+       currDb.add('peter', 'dacid'); 
        
       })
    });
