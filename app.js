@@ -32,10 +32,6 @@ window.addEventListener('load', function(){
      
        upgradeDB.createObjectStore('exchangeRate', {keyPath: 'id'});
       
-       console.log('Creating a rate index');
-       var store = upgradeDb.transaction.objectStore('exchangeRate');
-       store.createIndex('rate', 'rate', {unique: true});
-
      });
    });
  });
@@ -103,13 +99,10 @@ window.addEventListener('load', function(){
                 window.alert("Cannot convert this currencies offline");
                }
              });
-             return dbPromise.then(function(db) {
-              var tx = db.transaction('exchangeRate', 'readonly');
-              var store = tx.objectStore('exchangeRate');
-              var index = store.index('rate');
-              return index.get(key);
-              console.log(index.get(key));
-            });
+             dbPromise.then(function(db){
+               const exchangeRateStore = db.transaction('exchangeRate').objectStore('exchangeRate');
+               exchangeRateStore.get(obj2);
+             })
         }
      }
  
@@ -119,18 +112,3 @@ window.addEventListener('load', function(){
 
  }
  
- function convertOffline(e){
-  var transaction = db.transaction(['exchangeRate'], readonly);
-  var exchangeRateStore = transaction.objectStore('exchangeRate');
-  var index = exchangeRateStore.index(rate);
-  var output;
-  index.opunCursor().onsuccess = function(e){
-    var cursor = e.target.result;
-    if(cursor){
-      if(cursor.value.id == 'EUR_ALL'){
-        output = cursor.value.rate;
-        console.log(output);
-      }
-    }
-  }
- }
