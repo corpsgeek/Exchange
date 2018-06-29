@@ -28,10 +28,19 @@ window.addEventListener('load', () => {
         
      }
      //Created database for currency conversion.
-     dbPromise = idb.open('converter-DB', 1, upgradeDB => {
-     let currencyStore = upgradeDB.createObjectStore('exchangeRate', {keyPath: 'id'});
-     currencyStore.createObjectStore('currenciesName', {keypath: 'id'});
+     dbPromise = idb.open('converter-DB', 2, upgradeDB => {
+     switch(upgradeDB.oldVersion){
+       case 0: 
+        upgradeDB.createObjectStore('exchangeRate', {keyPath: 'id'});
+      case 1: 
+        const currDb =  upgradeDB.createObjectStore('currenciesName');
+
+      }
      });
+     dbPromise.then(db => {
+       currDb = db.transaction('currenciesName', 'readwrite').objectStore('currenciesName');
+       currDb.put(currency[key]);
+     })
    });
  });
 
