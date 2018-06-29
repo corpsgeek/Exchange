@@ -1,24 +1,22 @@
 let dbPromise;
-window.addEventListener('load', function(){
+window.addEventListener('load', () => {
   //Initializing  and installing service worker for  check.
  if ('serviceWorker' in navigator) {
   
     navigator.serviceWorker
       .register('sw.js', { scope: '/Exchange/' })
-      .then(function(registration) {
+      .then(registration => {
         console.log("Service Worker Registered");
       })
-      .catch(function(err) {
+      .catch(err => {
         console.log("Service Worker Failed to Register", err);
       })
   
 }
 //Fetching currencies from api.
   fetch('https://free.currencyconverterapi.com/api/v5/currencies')
-   .then(function(response) {
-     return response.json();
-   })
-   .then(function(myJson) {
+   .then(response => response.json())
+   .then(myJson => {
      const currency = myJson.results;
      //looping through the currency and psuhing item to the option tag of select lists.
      for(let key in currency){
@@ -30,7 +28,7 @@ window.addEventListener('load', function(){
         
      }
      //Created database for currency conversion.
-     dbPromise = idb.open('converter-DB', 1, function(upgradeDB){
+     dbPromise = idb.open('converter-DB', 1, upgradeDB => {
       upgradeDB.createObjectStore('exchangeRate', {keyPath: 'id'});
      });
    });
@@ -69,14 +67,14 @@ window.addEventListener('load', function(){
  
  //Using json parse ajax to fetch currency rates on convert while connected to the internet.
  if(from.length >= 0 && to.length >= 0 && amount.length >= 0){
-  var xmlhttp = new XMLHttpRequest();
+  const xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     //Check if there is internet connection.
       if (this.readyState == 4 && this.status == 200) {
           let obj = JSON.parse(this.responseText);
           
           //stores the currency id  format in obj2.
-          let obj2 = from+'_'+to;
+          let obj2 = `${from}_${to}`;
 
          //Stores the rate of the currency id
           let rate = obj[obj2].val;
@@ -91,16 +89,16 @@ window.addEventListener('load', function(){
               
              }
              //Storing currencies and rates used while online in the database.
-             dbPromise.then(function(db){
+             dbPromise.then(db => {
               const tx = db.transaction('exchangeRate', 'readwrite');
               const exchangeRateStore = tx.objectStore('exchangeRate');
               exchangeRateStore.put({
-                rate: rate,
+                rate,
                 id: obj2
               });
               return tx.complete;
               return rate;
-             }).catch(function(db){
+             }).catch(db => {
                if(!Exchange_Rate){
                 window.alert("Cannot convert this currencies offline");
                }
@@ -108,12 +106,12 @@ window.addEventListener('load', function(){
              
         }else{
           //While there is no internet connection convert offline by fetching used rates from db.
-          dbPromise.then(function(db){
+          dbPromise.then(db => {
             //strong currency id in obj2 e.g USD_FRK.
-            let obj2 = from+'_'+to;
+            let obj2 = `${from}_${to}`;
 
             const rates = db.transaction('exchangeRate').objectStore('exchangeRate');
-            rates.get(obj2).then(function(rateStored){
+            rates.get(obj2).then(rateStored => {
               
                let offlineRate = rateStored.rate;
                //Sets the exchange rate in a input field
@@ -131,7 +129,7 @@ window.addEventListener('load', function(){
          }
      }
  
-  xmlhttp.open("GET", 'https://free.currencyconverterapi.com/api/v5/convert?q='+from+'_'+to+'&compact=y', true);
+  xmlhttp.open("GET", `https://free.currencyconverterapi.com/api/v5/convert?q=${from}_${to}&compact=y`, true);
   xmlhttp.send();
      }
 
