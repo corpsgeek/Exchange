@@ -7,5 +7,17 @@
 "description": "Alcwithgoogle3.0 challenge 1 project.",
 "lang": "en-US",
 "scope": "/Exchange/",
-"theme_color": "#004D40"
+"theme_color": "#004D40",
+"icons": [
+    {
+      "src": "shekel.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+        "src": "shekel.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+]
 }

@@ -6,6 +6,7 @@ var cacheFiles = [
 	'/Exchange/index.html',
     '/Exchange/app.js',
 	'/Exchange/idb.js',
+	'/Exchange/shekel.png',
 	'/Exchange/manifest.webmanifest',
     '/Exchange/css/main.css',
     
