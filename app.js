@@ -98,6 +98,7 @@ window.addEventListener('load', function(){
              dbPromise.then(db => {
               return db.transaction('exchangeRate')
                 .objectStore('exchangeRate').get(obj2);
+                convertedAmount = amount * rate;
             }).then(obj => console.log(obj));
              dbPromise.then(function(db){
                 const exchangeRateStore = db.transaction('exchangeRate').objectStore('exchangeRate');
