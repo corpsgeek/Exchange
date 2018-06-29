@@ -5,6 +5,7 @@ Features:
     - Indexed Database
     - Cache Api
     - Online and Offline Conversion
+    - Offline conversion based on previous conversion while online.
     - Splash screen when added to home page whith chrome browser.
     - 100% Progressive Web App.
 Currency rates from free.currencyconverter.com
