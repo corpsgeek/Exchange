@@ -28,16 +28,14 @@ window.addEventListener('load', function(){
          document.getElementById("lists2").innerHTML += (`<option value = "${currency[list].id}">(${currency[list].currencySymbol})${currency[list].id} - ${currency[list].currencyName}</option>`)
         
      }
-     dbPromise = idb.open('converter-DB', 2, function(upgradeDB){
-      switch (upgradeDb.oldVersion) {
-        case 0:
+     dbPromise = idb.open('converter-DB', 1, function(upgradeDB){
+     
        upgradeDB.createObjectStore('exchangeRate', {keyPath: 'id'});
-       case 1:
+      
        console.log('Creating a rate index');
        var store = upgradeDb.transaction.objectStore('exchangeRate');
        store.createIndex('rate', 'rate', {unique: true});
- 
-      }
+
      });
    });
  });
