@@ -49,29 +49,7 @@ window.addEventListener('load', () => {
       }).catch(db =>{
         console.log('oops! an error occured');
       });
-      if (this.readyState !== 4 && this.status !== 200) {
-        dbPromise.then(db => {
-          const transaction =  db.transaction('currenciesName', 'readwrite');
-          currDb = transaction.objectStore('currenciesName');
-     
-          for(let i in currency){
-            document.getElementById("lists1").innerHTML += (`<option value = "${currency[key].id}">${currency[key].currencyName}</option>`)
-            
-            return transaction.complete;
-         }
-         
-         for(let j in currency){
-          document.getElementById("lists2").innerHTML += (`<option value = "${currency[key].id}">${currency[key].currencyName}</option>`)
-          
-          return transaction.complete;
-       }
-          
-         }).catch(db =>{
-           console.log('oops! an error occured');
-         });
-           
-      }  
-   });
+    });
  });
 
 
