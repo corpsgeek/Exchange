@@ -98,7 +98,7 @@ window.addEventListener('load', function(){
              
         }else{
           dbPromise.then(function(db){
-
+            let obj2 = from+'_'+to;
             const rates = db.transaction('exchangeRate').objectStore('exchangeRate');
             rates.get(obj2).then(function(rateStored){
               
