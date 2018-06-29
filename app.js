@@ -50,8 +50,15 @@ window.addEventListener('load', () => {
         console.log('oops! an error occured');
       });
       dbPromise.then(db => {
+        const id;
+        const name;
+     
+        for(let i in currency){
+           id = `${currency[i].id}`;
+           name = `${currency[i].currencyName}`;
+        }
         return db.transaction('currenciesName')
-          .objectStore('currenciesName').getAll(`${currency[i].id}`);
+          .objectStore('currenciesName').getAll(name);
       }).then(allObjs => console.log(allObjs));
     });
  });
