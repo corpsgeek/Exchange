@@ -37,6 +37,20 @@ window.addEventListener('load', function(){
  });
 
 
+ let selectedValueOfList1 = 0;
+ let selectedValueOfList2 = 0;
+ function processList1(){
+     //Storing currency value for first lists
+      selectedValueOfList1 = document.getElementById("lists1").value;
+  
+     
+ }
+ 
+ function processList2(){
+     //Storing currency value for first lists
+      selectedValueOfList2 = document.getElementById("lists2").value;
+     
+ }
  let from = document.getElementById("lists1").value;
  let to = document.getElementById("lists2").value;
  let amount = document.getElementById("input-box").value;
