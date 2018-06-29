@@ -108,25 +108,41 @@ to = document.getElementById("lists2").value;
      }
 
  }
- dbPromise.then(function(db){
-  const exchangeRateStore = db.transaction('exchangeRate').objectStore('exchangeRate');
-  let storedRate;
-  exchangeRateStore.openCursor().then(function cursorIterate(cursor){
-    if(!cursor) return;
-    storedRate = cursor.value;
-    return(
-      cursor.value.id === obj2 ||
-      cursor.continue().then(cursorIterate)
-  );
-  })
- }).then(function(isRateFound){
-  if (isRateFound && storedRate)
-    console.log(storedRate.rate);
-    convertedAmount = storedRate.rate * amount;
-  convertedAmount =  `${to} ${(
-      storedRate.rate * amount
-  )}`;
+ dbPromise.then(db => {
+    const ratesStore = db.transaction('exchangeRate').objectStore('exchangeRate');
+    let storedRate;
+    ratesStore
+      .openCursor()
+      .then(function cursorIterate(cursor) {
+        if (!cursor) return;
+        storedRate = cursor.value;
+        // Once we find the wanted rate, the cursor stops iterating
+        return (
+          cursor.value.id === `${from}_${to}` ||
+          cursor.continue().then(cursorIterate)
+        );
+      })
+      .then(isRateFound => {
+        // returns undefined if not found, and returns the storedRate if found
 
- });
- 
- 
+        if (isRateFound && storedRate)
+          // rate already stored
+          convertedAmount = `${to} ${(
+            storedRate.rate * amount
+          ).toFixed(2)}`;
+          else
+            /*
+            rate not found in IDB
+            if the client is online the rate will be fetched and added to idb
+            if offline the client will be shown an alert
+            */
+              return fetchRate(isRateFound).then(
+                fetchedRate =>
+                  (convertedAmount = `${to} ${(
+                    fetchedRate * amount
+                  ).toFixed(2)}`)
+              );
+        
+       
+      });
+    });
