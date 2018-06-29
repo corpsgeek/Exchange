@@ -46,7 +46,7 @@ window.addEventListener('load', function(){
      //Storing currency value for first lists
       selectedValueOfList1 = document.getElementById("lists1").value;
   
-     
+     console.log(selectedValueOfList1);
  }
  
  function processList2(){
