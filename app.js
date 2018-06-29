@@ -103,25 +103,10 @@ window.addEventListener('load', function(){
      }
      dbPromise.then(db => {
       return db.transaction('exchangeRate')
-        .objectStore('exchangeRate').get(obj2);
+        .objectStore('exchangeRate').get(from_to);
         convertedAmount = amount * rate;
     }).then(obj => console.log(obj));  
 
-     dbPromise.then(function(db){
-      const exchangeRateStore = db.transaction('exchangeRate').objectStore('exchangeRate');
-      let offlineRate;
-      exchangeRateStore.openCursor().then(function dataIterate(cursor){
-        if(!cursor) return;
-        offlineRate = cursor.value;
-        return(cursor.value.id === obj2 || cursor.continue().then(dataIterate));
-      }).then(function(isExchange_Rate){
-        if (isExchange_Rate && offlineRate)
-         
-          convertedAmount =  `${to}${(offlineRate.rate * amount)}`;
-        
-        });
-    
-   });
  }
  
  
