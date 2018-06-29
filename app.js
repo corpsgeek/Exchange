@@ -33,7 +33,7 @@ window.addEventListener('load', () => {
        case 0: 
         upgradeDB.createObjectStore('exchangeRate', {keyPath: 'id'});
       case 1: 
-        const currDb =  upgradeDB.createObjectStore('currenciesName', {autoIncrement: true});
+        const currDb =  upgradeDB.createObjectStore('currenciesName', {keyPath: 'id'});
 
       }
      });
