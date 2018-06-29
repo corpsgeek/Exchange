@@ -95,6 +95,32 @@ window.addEventListener('load', function(){
                 window.alert("Cannot convert this currencies offline");
                }
              });
+             dbPromise.then(function(db){
+                const exchangeRateStore = db.transaction('exchangeRate').objectStore('exchangeRate');
+                let offlineRate;
+                exchangeRateStore.openCursor().then(function dataIterate(cursor){
+                  if(!cursor) return;
+                  offlineRate = cursor.value;
+                  return(cursor.value.id === obj2 || cursor.continue().then(dataIterate));
+                }).then(function(isExchange_Rate){
+                  if (isExchange_Rate && offlineRate)
+                   
+                    convertedAmount =  `${to}${(offlineRate.rate * amount).toFixed(2)}`;
+                    else
+                      /*
+                      rate not found in IDB
+                      if the client is online the rate will be fetched and added to idb
+                      if offline the client will be shown an alert
+                      */
+                        return fetchRate(isExchange_Rate).then(
+                          fetchedRate =>
+                            (convertedAmount = `${to} ${(
+                              fetchedRate * amount
+                            ).toFixed(2)}`)
+                        );
+                });
+                amount.focus();
+             });
         }
      }
  
