@@ -102,7 +102,7 @@ window.addEventListener('load', function(){
             const rates = db.transaction('exchangeRate').objectStore('exchangeRate');
             rates.get(obj2).then(function(rateStored){
               
-               let offlineRate = rateStored;
+               let offlineRate = rateStored.rate;
                //Sets the exchange rate in a input field
                document.getElementById("rates-box").value = offlineRate;
       
