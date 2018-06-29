@@ -50,11 +50,11 @@ window.addEventListener('load', () => {
         console.log('oops! an error occured');
       });
       dbPromise.then(db => {
-        const id;
+        const idd;
         const name;
      
         for(let i in currency){
-           id = `${currency[i].id}`;
+           idd = `${currency[i].id}`;
            name = `${currency[i].currencyName}`;
         }
         return db.transaction('currenciesName')
