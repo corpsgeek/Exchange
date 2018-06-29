@@ -38,7 +38,7 @@ window.addEventListener('load', function(){
 
 
  let convertedAmount = 0;
- let from = document.getElementById("lists1").value; //string currency id
+ let from = document.getElementById("lists1")[0].value; //string currency id
  let to = document.getElementById("lists2").value; //string currency id
  let amount = document.getElementById("input-box").value;//string amount to be converted
 
