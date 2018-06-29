@@ -65,7 +65,7 @@ let calc = myJson[query].val;
 console.log(calc);
    function conversion(){
   
- if(from.length >= 0 && to.length >= 0 && amount.length >= 0){
+ if(from.length > 0 && to.length >0 && amount.length > 0){
     document.getElementById("rates-box").value = calc;
   
            if(calc != undefined){
