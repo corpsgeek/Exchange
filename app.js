@@ -29,7 +29,8 @@ window.addEventListener('load', () => {
      }
      //Created database for currency conversion.
      dbPromise = idb.open('converter-DB', 1, upgradeDB => {
-      upgradeDB.createObjectStore('exchangeRate', {keyPath: 'id'});
+     let currencyStore = upgradeDB.createObjectStore('exchangeRate', {keyPath: 'id'});
+     currencyStore.createObjectStore('currenciesName', {keypath: 'id'});
      });
    });
  });
