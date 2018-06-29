@@ -84,7 +84,37 @@ to = document.getElementById("lists2").value;
               
               document.getElementById("results-box").value = convertedAmount;
               
-             }
+             } 
+            }
+
+            xmlhttp.open("GET", 'https://free.currencyconverterapi.com/api/v5/convert?q='+from+'_'+to+'&compact=y', true);
+            xmlhttp.send();
+               }
+              }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             const fetchRate = function(isRateFound) {
+              return fetch(
+                `https://free.currencyconverterapi.com/api/v5/convert?q=${from}_${to}&compact=ultra`
+              )
+                .then(rateResp => {
+                  console.log(rateResp);
+                  return rateResp.json();
+                })
+                .then(rate => {
+                  const rate_value = rate[`${from}_${to}`];
              dbPromise.then(function(db){
               const tx = db.transaction('exchangeRate', 'readwrite');
               const exchangeRateStore = tx.objectStore('exchangeRate');
@@ -99,50 +129,46 @@ to = document.getElementById("lists2").value;
                 window.alert("Cannot convert this currencies offline");
                }
              });
+            });
+        dbPromise.then(db => {
+         const exchangeRateStore = db.transaction('exchangeRate').objectStore('exchangeRate');
+         let storedRate;
+         exchangeRateStore
+           .openCursor()
+           .then(function cursorIterate(cursor) {
+             if (!cursor) return;
+             storedRate = cursor.value;
+             // Once we find the wanted rate, the cursor stops iterating
+             return (
+               cursor.value.id === `${from}_${to}` ||
+               cursor.continue().then(cursorIterate)
+             );
+           })
+           .then(isRateFound => {
+             // returns undefined if not found, and returns the storedRate if found
+     
+             if (isRateFound && storedRate)
+               // rate already stored
+               convertedAmount = `${to} ${(
+                 storedRate.rate * amount
+               ).toFixed(2)}`;
+               else
+                 /*
+                 rate not found in IDB
+                 if the client is online the rate will be fetched and added to idb
+                 if offline the client will be shown an alert
+                 */
+                   return fetchRate(isRateFound).then(
+                     fetchedRate =>
+                       (convertedAmount = `${to} ${(
+                         fetchedRate * amount
+                       ).toFixed(2)}`)
+                   );
+             
             
+           });
+         })
+        
         }
-     }
- 
-  xmlhttp.open("GET", 'https://free.currencyconverterapi.com/api/v5/convert?q='+from+'_'+to+'&compact=y', true);
-  xmlhttp.send();
-     }
-
-     dbPromise.then(db => {
-      const exchangeRateStore = db.transaction('exchangeRate').objectStore('exchangeRate');
-      let storedRate;
-      exchangeRateStore
-        .openCursor()
-        .then(function cursorIterate(cursor) {
-          if (!cursor) return;
-          storedRate = cursor.value;
-          // Once we find the wanted rate, the cursor stops iterating
-          return (
-            cursor.value.id === `${from}_${to}` ||
-            cursor.continue().then(cursorIterate)
-          );
-        })
-        .then(isRateFound => {
-          // returns undefined if not found, and returns the storedRate if found
-  
-          if (isRateFound && storedRate)
-            // rate already stored
-            convertedAmount = `${to} ${(
-              storedRate.rate * amount
-            ).toFixed(2)}`;
-            else
-              /*
-              rate not found in IDB
-              if the client is online the rate will be fetched and added to idb
-              if offline the client will be shown an alert
-              */
-                return fetchRate(isRateFound).then(
-                  fetchedRate =>
-                    (convertedAmount = `${to} ${(
-                      fetchedRate * amount
-                    ).toFixed(2)}`)
-                );
-          
-         
-        });
-      });
- }
+      
+    } 
