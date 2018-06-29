@@ -38,21 +38,10 @@ window.addEventListener('load', function(){
 
 
  let convertedAmount = 0;
- let from = document.getElementById("lists1").value;
- let to = document.getElementById("lists2").value;
- let amount = document.getElementById("input-box").value;
+ let from = document.getElementById("lists1").value; //string currency id
+ let to = document.getElementById("lists2").value; //string currency id
+ let amount = document.getElementById("input-box").value;//string amount to be converted
 
- function processList1(){
-     //Storing currency value for first lists
-     from = document.getElementById("lists1").value;
-     
- }
- 
- function processList2(){
-     //Storing currency value for first lists
-     to = document.getElementById("lists2").value;
-     
- }
 
  fetch(`https://free.currencyconverterapi.com/api/v5/convert?q=${from}_${to}&compact=y`)
  .then(function(response) {
