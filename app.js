@@ -29,45 +29,17 @@ window.addEventListener('load', function(){
         
      }
      dbPromise = idb.open('converter-DB', 1, function(upgradeDB){
-     
-       upgradeDB.createObjectStore('exchangeRate', {keyPath: 'id'});
-      
+      upgradeDB.createObjectStore('exchangeRate', {keyPath: 'id'});
      });
    });
  });
 
 
- let convertedAmount = 0;
- let from = document.getElementById("lists1")[0].value; //string currency id
- let to = document.getElementById("lists2").value; //string currency id
- let amount = document.getElementById("input-box").value;//string amount to be converted
 
 
- fetch(`https://free.currencyconverterapi.com/api/v5/convert?q=${from}_${to}&compact=y`)
- .then(function(response) {
-   return response.json();
- })
- .then(function(myJson) {
-let calc = myJson[query].val;
-console.log(calc);
-   function conversion(){
-  
- if(from.length > 0 && to.length >0 && amount.length > 0){
-    document.getElementById("rates-box").value = calc;
-  
-           if(calc != undefined){
-               //converting the inputed amount
-               convertedAmount =  parseFloat(amount * rate).toFixed(2);
-               
-               document.getElementById("results-box").value = convertedAmount;
-               
-              }
-       
-      }
-   } 
- });
 
-/*
+
+
  let selectedValueOfList1 = 0;
  let selectedValueOfList2 = 0;
  function processList1(){
@@ -112,23 +84,18 @@ console.log(calc);
              dbPromise.then(function(db){
               const tx = db.transaction('exchangeRate', 'readwrite');
               const exchangeRateStore = tx.objectStore('exchangeRate');
-              
               exchangeRateStore.put({
                 rate: rate,
                 id: obj2
               });
               return tx.complete;
               return rate;
-              
-            }).catch(function(db){
+             }).catch(function(db){
                if(!Exchange_Rate){
                 window.alert("Cannot convert this currencies offline");
                }
              });
-             dbPromise.then(function(db){
-               const exchangeRateStore = db.transaction('exchangeRate').objectStore('exchangeRate');
-               exchangeRateStore.get(obj2);
-             })
+             
         }
      }
  
@@ -137,4 +104,3 @@ console.log(calc);
      }
 
  }
- */
