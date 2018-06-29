@@ -49,6 +49,13 @@ window.addEventListener('load', () => {
       }).catch(db =>{
         console.log('oops! an error occured');
       });
+   }).catch(myJson => {
+    dbPromise.then(db => {
+    const  curr = db.transaction('currenciesName').objectStore('currenciesName');
+      curr.get(`${currency[i].currencySymbol}`).then(curName => {
+        let offlinecurrName = curName.currencyName;
+        console.log(offlinecurrName);
+    });
    });
  });
 
