@@ -95,32 +95,33 @@ window.addEventListener('load', function(){
                 window.alert("Cannot convert this currencies offline");
                }
              });
-             dbPromise.then(db => {
-              return db.transaction('exchangeRate')
-                .objectStore('exchangeRate').get(obj2);
-                convertedAmount = amount * rate;
-            }).then(obj => console.log(obj));
-             dbPromise.then(function(db){
-                const exchangeRateStore = db.transaction('exchangeRate').objectStore('exchangeRate');
-                let offlineRate;
-                exchangeRateStore.openCursor().then(function dataIterate(cursor){
-                  if(!cursor) return;
-                  offlineRate = cursor.value;
-                  return(cursor.value.id === obj2 || cursor.continue().then(dataIterate));
-                }).then(function(isExchange_Rate){
-                  if (isExchange_Rate && offlineRate)
-                   
-                    convertedAmount =  `${to}${(offlineRate.rate * amount)}`;
-                  
-                  });
-              
-             });
         }
      }
  
   xmlhttp.open("GET", 'https://free.currencyconverterapi.com/api/v5/convert?q='+from+'_'+to+'&compact=y', true);
   xmlhttp.send();
      }
+     dbPromise.then(db => {
+      return db.transaction('exchangeRate')
+        .objectStore('exchangeRate').get(obj2);
+        convertedAmount = amount * rate;
+    }).then(obj => console.log(obj));  
+
+     dbPromise.then(function(db){
+      const exchangeRateStore = db.transaction('exchangeRate').objectStore('exchangeRate');
+      let offlineRate;
+      exchangeRateStore.openCursor().then(function dataIterate(cursor){
+        if(!cursor) return;
+        offlineRate = cursor.value;
+        return(cursor.value.id === obj2 || cursor.continue().then(dataIterate));
+      }).then(function(isExchange_Rate){
+        if (isExchange_Rate && offlineRate)
+         
+          convertedAmount =  `${to}${(offlineRate.rate * amount)}`;
+        
+        });
+    
+   });
  }
  
  
