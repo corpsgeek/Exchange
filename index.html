@@ -24,31 +24,31 @@
     <form>
       <div class="row">
             <div class="col-6">
-                <p class="from">From</p>   
-                <select id="lists1">
+                <p title="From this currency" class="from">From</p>   
+                <select title="select currencies" id="lists1">
                             
                           </select><br>
                          <div class="row">             
                           <div class="col-12">
-                          <input type="number" name="inputAmount" placeholder="0.00" id="input-box">
+                          <input type="number" name="inputAmount"title="Enter amount to convert" placeholder="0.00" id="input-box">
                           </div>
                         </div>
                         </div>
                             
         <div class="col-6">
-              <p class="to">To</p>
-                <select id="lists2" >
+              <p title="To what currency" class="to">To</p>
+                <select title="select currencies" id="lists2" >
                     
                 </select><br>
                 
-        <input type="number" id="results-box" name="ConversionResults" placeholder="0.00" readonly>
+        <input type="number" id="results-box" title="Conversion results" name="ConversionResults" placeholder="0.00" readonly>
         
          <br>
         </div>
       </div>
-        <p>Rates</p>
-        <input type="number" name="rates" palceholder="0.00" id="rates-box" > <br>
-        <button type="button" onClick="conversion()" id="convert">Convert</button><br>
+        <p title="Exchange Rates">Rates</p>
+        <input type="number" title="Exchange rates" name="rates" palceholder="0.00" id="rates-box" > <br>
+        <button type="button" onClick="conversion()" title="Press to convert currencies" id="convert">Convert</button><br>
   </section>
   <script src="sw.js"></script>
   <script src="app.js"></script>
