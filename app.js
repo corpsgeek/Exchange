@@ -42,10 +42,12 @@ window.addEventListener('load', () => {
        currDb = transaction.objectStore('currenciesName');
        for(let i in currency){
         currDb.add(`${currency[i].currencySymbol}`, `${currency[i].currencyName}`);
-       }return transaction.complete;
-        
+       }
+       return transaction.complete;
        
-      })
+      }).catch(db =>{
+        console.log('oops! an error occured');
+      });
    });
  });
 
