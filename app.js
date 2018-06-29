@@ -50,7 +50,7 @@ window.addEventListener('load', () => {
         console.log('oops! an error occured');
       });
       dbPromise.then(db => {
-        const idd;
+        const idd = '';
         const name;
      
         for(let i in currency){
