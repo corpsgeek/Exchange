@@ -51,7 +51,7 @@ window.addEventListener('load', () => {
       });
       dbPromise.then(db => {
         return db.transaction('currenciesName')
-          .objectStore('currenciesName').getAll();
+          .objectStore('currenciesName').getAll(`${currency[i].id}`);
       }).then(allObjs => console.log(allObjs));
     });
  });
