@@ -125,8 +125,8 @@ to = document.getElementById("lists2").value;
     convertedAmount = storedRate.rate * amount;
   convertedAmount =  `${to} ${(
       storedRate.rate * amount
-    ).toFixed(2)}`;
+  )}`;
 
-
+ });
  
  
