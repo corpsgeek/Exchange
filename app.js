@@ -96,7 +96,27 @@ window.addEventListener('load', function(){
                }
              });
              
-        }
+        }else{
+          dbPromise.then(function(db){
+
+            const rates = db.transaction('exchangeRate').objectStore('exchangeRate');
+            rates.get(obj2).then(function(rateStored){
+              
+               let offlineRate = rateStored;
+               //Sets the exchange rate in a input field
+               document.getElementById("rates-box").value = offlineRate;
+      
+               if(offlineRate != undefined){
+                   //converting the inputed amount
+                    convertedAmount =  parseFloat(amount * offlineRate);
+                   
+                   document.getElementById("results-box").value = convertedAmount;
+                   
+                  }
+            });
+         
+          });
+         }
      }
  
   xmlhttp.open("GET", 'https://free.currencyconverterapi.com/api/v5/convert?q='+from+'_'+to+'&compact=y', true);
