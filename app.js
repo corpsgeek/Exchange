@@ -72,7 +72,7 @@ window.addEventListener('load', function(){
          
           let rate = obj[obj2].val;
           //Sets the exchange rate in a input field
-          document.getElementById("rates-box").value = rate;
+          document.getElementById("rates-box").innerHTML = rate;
  
           if(rate != undefined){
               //converting the inputed amount
