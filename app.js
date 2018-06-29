@@ -39,8 +39,9 @@ window.addEventListener('load', () => {
      });
      dbPromise.then(db => {
        currDb = db.transaction('currenciesName', 'readwrite').objectStore('currenciesName');
-       currDb.put(currency[key]);
-     })
+       for(let i in currency){
+         currDb.put(currency[i]);
+       }})
    });
  });
 
