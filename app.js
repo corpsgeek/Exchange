@@ -95,17 +95,32 @@ window.addEventListener('load', function(){
                 window.alert("Cannot convert this currencies offline");
                }
              });
+             dbPromise.then(function(db){
+              const exchangeRateStore = db.transaction('exchangeRate').objectStore('exchangeRate');
+              let storedRate;
+              exchangeRateStore.openCursor().then(function cursorIterate(cursor){
+                if(!cursor) return;
+                storedRate = cursor.value;
+                return(
+                  cursor.value.id === obj2 ||
+                  cursor.continue().then(cursorIterate)
+              );
+              })
+             }).then(function(isRateFound){
+              if (isRateFound && storedRate)
+                console.log(storedRate.rate);
+                convertedAmount = storedRate.rate * amount;
+              convertedAmount =  `${to} ${(
+                  storedRate.rate * amount
+                ).toFixed(2)}`;
+
+             })
         }
      }
  
   xmlhttp.open("GET", 'https://free.currencyconverterapi.com/api/v5/convert?q='+from+'_'+to+'&compact=y', true);
   xmlhttp.send();
      }
-     dbPromise.then(db => {
-      return db.transaction('exchangeRate')
-        .objectStore('exchangeRate').get(from_to);
-        convertedAmount = amount * rate;
-    }).then(obj => console.log(obj));  
 
  }
  
