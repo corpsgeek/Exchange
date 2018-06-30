@@ -65,6 +65,8 @@ form{
     padding-top: 200px;
 }
 #input-box, #results-box{
+    margin-top: 15px;
+    padding-left: 20px;
    border-radius: 8px;
     height: 200px;
     max-width: 80%;
