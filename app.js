@@ -39,21 +39,17 @@ window.addEventListener('load', () => {
      });
      //Stroing currencies name and id in the database.
      dbPromise.then(db => {
-       const transaction =  db.transaction('currenciesName', 'readwrite');
-       currDb = transaction.objectStore('currenciesName');
-       for(let i in currency){
-        currDb.put(`${currency[i].id}`, `${currency[i].currencyName}`);
-      }
-      return transaction.complete;
+      const transaction =  db.transaction('currenciesName', 'readwrite');
+      currDb = transaction.objectStore('currenciesName');
+      for(let i in currency){
+       currDb.put(`${currency[i].currencySymbol}`, `${currency[i].currencyName}`);
+       return transaction.complete;
+     }
+     
       
-       
-      }).catch(db =>{
-        console.log('offline');
-        dbPromise.then(db => {
-          
-            db.transaction('currenciesName').objectStore('currenciesName').getAll().then(allObjs => console.log(allObjs));
-          })
-      });
+     }).catch(db =>{
+       console.log('oops! an error occured');
+     });
     
     });
  });
