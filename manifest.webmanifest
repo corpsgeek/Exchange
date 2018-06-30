@@ -3,7 +3,7 @@
 "short_name": "MoneyEx",
 "display": "standalone",
 "start_url": ".",
-"background_color": "#fff",
+"background_color": "#80CBC4",
 "description": "Alcwithgoogle3.0 challenge 1 project.",
 "lang": "en-US",
 "scope": "/Exchange/",

@@ -1,3 +1,5 @@
+//App backend implementation
+//Database variable
 let dbPromise;
 window.addEventListener('load', () => {
   //Initializing  and installing service worker for  check.

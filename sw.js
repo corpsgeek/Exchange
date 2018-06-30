@@ -1,3 +1,4 @@
+//Service worker implementation
 const cacheName = 'v1';
 // Default files to always cache
 const cacheFiles = [
