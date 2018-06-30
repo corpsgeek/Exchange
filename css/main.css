@@ -73,6 +73,9 @@ form{
     font-size: 40px;
     border: 1.5px solid #00695C;
 }
+#results-box{
+    margin-top: 15px;
+}
 select{
     height:  30px;
     width: 100px;
