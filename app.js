@@ -44,6 +44,7 @@ window.addEventListener('load', () => {
       for(let i in currency){
        currDb.put(`${currency[i].currencyName}`, `${currency[i].currencySymbol}`);
        return transaction.complete;
+       console.log(`${currency[i].currencyName}`);
      }
      }).catch(db =>{
        console.log('oops! an error occured');
