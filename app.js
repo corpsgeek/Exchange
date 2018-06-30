@@ -42,11 +42,9 @@ window.addEventListener('load', () => {
       const transaction =  db.transaction('currenciesName', 'readwrite');
       currDb = transaction.objectStore('currenciesName');
       for(let i in currency){
-       currDb.put(`${currency[i].currencySymbol}`, `${currency[i].currencyName}`);
+       currDb.put(`${currency[i].currencyName}`, `${currency[i].currencySymbol}`);
        return transaction.complete;
      }
-     
-      
      }).catch(db =>{
        console.log('oops! an error occured');
      });
