@@ -96,13 +96,13 @@ select{
 }
 #convert{
     margin-top: 30px;
-    height: 35px;
+    height: 45px;
     width: 200px;
     background-color: #B2DFDB;
     border:1px solid #616161;
     border-radius: 4px;
     font-size: 22px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     cursor: pointer;
