@@ -43,11 +43,12 @@ window.addEventListener('load', () => {
       currDb = transaction.objectStore('currenciesName');
       for(let i in currency){
        currDb.put(`${currency[i].currencyName}`, `${currency[i].currencySymbol}`);
-     
-       console.log(`${currency[i].currencyName}`);
      }
      }).catch(db =>{
-       console.log('oops! an error occured');
+    db.transaction('currenciesName').objectStore('currenciesName').getAll().then(allCurr => {
+      console.log(allCurr);
+      
+    });
      });
     
     });
