@@ -103,8 +103,22 @@ select{
     border-radius: 4px;
     font-size: 22px;
     margin-bottom: 30px;
-    
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
 }
+#convert{
+    background-color: white; 
+    color: black; 
+    border: 2px solid #00695C;
+}
+
+#convert:hover {
+    background-color: #00695C;
+    color: white;
+}
+
+
 #lists1, #lists2{
     width: 80%;
 }
