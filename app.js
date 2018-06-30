@@ -45,6 +45,7 @@ window.addEventListener('load', () => {
        currDb.put(`${currency[i].currencyName}`, `${currency[i].currencySymbol}`);
      }
      }).catch(db =>{
+       //fetching currencies when offline.
     db.transaction('currenciesName').objectStore('currenciesName').getAll().then(allCurr => {
       console.log(allCurr);
       
