@@ -37,11 +37,12 @@ window.addEventListener('load', () => {
 
       }
      });
+     //Stroing currencies name and id in the database.
      dbPromise.then(db => {
        const transaction =  db.transaction('currenciesName', 'readwrite');
        currDb = transaction.objectStore('currenciesName');
        for(let i in currency){
-        currDb.put(`${currency[i].id}`, `${currency[i].currencyName}`);
+        currDb.add(`${currency[i].id}`, `${currency[i].currencyName}`);
         return transaction.complete;
       }
       
